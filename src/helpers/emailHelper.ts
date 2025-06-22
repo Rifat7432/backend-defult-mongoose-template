@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer';
 import config from '../config';
 import { errorLogger, logger } from '../shared/logger';
 import { ISendEmail } from '../types/email';
+import colors from 'colors';
 
 const transporter = nodemailer.createTransport({
      host: config.email.host,

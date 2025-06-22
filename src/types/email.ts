@@ -3,3 +3,4 @@ export type ISendEmail = {
      subject: string;
      html: string;
 };
+ 

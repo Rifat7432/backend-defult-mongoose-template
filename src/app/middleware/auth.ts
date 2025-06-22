@@ -5,21 +5,23 @@ import config from '../../config';
 import AppError from '../../errors/AppError';
 import { verifyToken } from '../../utils/verifyToken';
 import { User } from '../modules/user/user.model';
+import { logger } from '../../shared/logger';
 
 const auth =
      (...roles: string[]) =>
      async (req: Request, res: Response, next: NextFunction) => {
           try {
-               const tokenWithBearer = req.headers.authorization;
-               if (!tokenWithBearer) {
+               const token = req.headers.authorization;
+               if (!token) {    
                     throw new AppError(StatusCodes.UNAUTHORIZED, 'You are not authorized !!');
                }
-               if (!tokenWithBearer.startsWith('Bearer')) {
-                    throw new AppError(StatusCodes.UNAUTHORIZED, 'Token send is not valid !!');
-               }
+               // if (!tokenWithBearer.startsWith('Bearer')) {
+               //      throw new AppError(StatusCodes.UNAUTHORIZED, 'Token send is not valid !!');
+               // }
 
-               if (tokenWithBearer && tokenWithBearer.startsWith('Bearer')) {
-                    const token = tokenWithBearer.split(' ')[1];
+               // if (tokenWithBearer && tokenWithBearer.startsWith('Bearer')) {
+               if (token) {
+                    // const token = tokenWithBearer.split(' ')[1];
 
                     //verify token
                     let verifyUser: any;
