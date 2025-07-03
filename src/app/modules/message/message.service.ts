@@ -6,13 +6,10 @@ import AppError from '../../../errors/AppError';
 
 const sendMessageToDB = async (payload: IMessage): Promise<IMessage> => {
      const response = await Message.create(payload);
-
      // Update the lastMessage and readBy fields of the associated chat
      const chat = await Chat.findByIdAndUpdate(response?.chatId, { lastMessage: response._id, readBy: [payload.sender.toString()] }, { new: true });
-
      //@ts-ignore
      const io = global.io;
-
      // Ensure `chat?.participants` is an array and filter out invalid values
      const notificationReceiver = chat?.participants
           ?.filter((participant) => participant && participant.toString() !== payload.sender.toString())
@@ -22,7 +19,6 @@ const sendMessageToDB = async (payload: IMessage): Promise<IMessage> => {
      if (notificationReceiver && io) {
           io.emit(`newMessage::${notificationReceiver}`, response);
      }
-
      return response;
 };
 

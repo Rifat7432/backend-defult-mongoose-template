@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import Stripe from 'stripe';
 import colors from 'colors';
-import { handleAccountUpdatedEvent, handleSubscriptionCreated, handleSubscriptionDeleted, handleSubscriptionUpdated } from './handlers';
+import { handleSubscriptionCreated, handleSubscriptionDeleted, handleSubscriptionUpdated } from './handlers';
 import { StatusCodes } from 'http-status-codes';
 import { logger } from '../../shared/logger';
 import config from '../../config';
